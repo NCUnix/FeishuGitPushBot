@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/ncuhome/FeishuGitPushBot/bot"
+	"github.com/NCUnix/FeishuGitPushBot/bot"
 )
 
 func main() {

@@ -1,4 +1,4 @@
-module github.com/ncuhome/FeishuGitPushBot
+module github.com/NCUnix/FeishuGitPushBot
 
 go 1.26.3
 
