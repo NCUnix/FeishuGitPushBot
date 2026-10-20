@@ -1,0 +1,33 @@
+name: Docker Release
+
+on:
+  push:
+    tags:
+      - v**
+
+jobs:
+  Release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Ko
+        uses: ko-build/setup-ko@v0.9
+        with:
+          use-sudo: true
+
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: stable
+          cache: false
+
+      - name: Build Image and Push
+        env:
+          KO_GFLAGS: >-
+            -trimpath
+            -ldflags='-s -w -extldflags "-static"'
+        run: ko build --bare --tags latest,${{ github.ref_name }} .
