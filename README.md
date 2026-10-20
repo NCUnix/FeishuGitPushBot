@@ -20,19 +20,19 @@
 
 程序通过环境变量加载配置，建议复制 `.env.example` 为 `.env` 进行配置：
 
-| 环境变量 | 说明 | 示例 |
-| :--- | :--- | :--- |
-| `FEISHU_WEBHOOK` | 飞书自定义机器人 Webhook 地址 | `https://open.feishu.cn/open-apis/bot/v2/hook/...` |
-| `FEISHU_SECRET` | 飞书机器人安全校验密钥 | `your_feishu_secret` |
-| `GITHUB_KEY` | GitHub Webhook Secret | `your_github_secret` |
-| `GITHUB_BOT_USERS` | (可选) 忽略推送的用户列表，逗号分隔；会过滤 CI/Workflow 等独立通知，PR/Issue/评论类事件仅在能关联到父消息时作为话题回复发送 | `github-advanced-security[bot],dependabot[bot]` |
-| `FEISHU_APP_ID` | (可选) 飞书应用 App ID | `cli_xxx` |
-| `FEISHU_APP_SECRET` | (可选) 飞书应用 App Secret | `xxx` |
-| `FEISHU_CHAT_ID` | (可选) 指定接收消息的群组 ID | `oc_xxx` |
-| `DATABASE_URL` | (可选) PostgreSQL 连接串，首次启动自动建表，升级自动补齐新字段 | `postgres://user:pass@host/db` |
-| `EVENTS_MERGE_WINDOW` | (可选) 同类事件合并窗口（分钟），默认 10 | `10` |
-| `EVENTS_THREAD_REPLY_WINDOW` | (可选) 话题回复窗口（分钟），超过此时间的父消息不再以话题回复，默认 60 | `60` |
-| `GITHUB_WEBHOOK_IPS` | (可选) GitHub Webhook 来源 IP 白名单，CIDR 格式，逗号分隔 | `192.30.252.0/22,185.199.108.0/22` |
+| 环境变量                     | 说明                                                                                                                        | 示例                                               |
+|:-----------------------------|:----------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------|
+| `FEISHU_WEBHOOK`             | 飞书自定义机器人 Webhook 地址                                                                                               | `https://open.feishu.cn/open-apis/bot/v2/hook/...` |
+| `FEISHU_SECRET`              | 飞书机器人安全校验密钥                                                                                                      | `your_feishu_secret`                               |
+| `GITHUB_KEY`                 | GitHub Webhook Secret                                                                                                       | `your_github_secret`                               |
+| `GITHUB_BOT_USERS`           | (可选) 忽略推送的用户列表，逗号分隔；会过滤 CI/Workflow 等独立通知，PR/Issue/评论类事件仅在能关联到父消息时作为话题回复发送 | `github-advanced-security[bot],dependabot[bot]`    |
+| `FEISHU_APP_ID`              | (可选) 飞书应用 App ID                                                                                                      | `cli_xxx`                                          |
+| `FEISHU_APP_SECRET`          | (可选) 飞书应用 App Secret                                                                                                  | `xxx`                                              |
+| `FEISHU_CHAT_ID`             | (可选) 指定接收消息的群组 ID                                                                                                | `oc_xxx`                                           |
+| `DATABASE_URL`               | (可选) PostgreSQL 连接串，首次启动自动建表，升级自动补齐新字段                                                              | `postgres://user:pass@host/db`                     |
+| `EVENTS_MERGE_WINDOW`        | (可选) 同类事件合并窗口（分钟），默认 10                                                                                    | `10`                                               |
+| `EVENTS_THREAD_REPLY_WINDOW` | (可选) 话题回复窗口（分钟），超过此时间的父消息不再以话题回复，默认 60                                                      | `60`                                               |
+| `GITHUB_WEBHOOK_IPS`         | (可选) GitHub Webhook 来源 IP 白名单，CIDR 格式，逗号分隔                                                                   | `192.30.252.0/22,185.199.108.0/22`                 |
 
 > 配置后，机器人将支持：
 >
@@ -55,11 +55,15 @@ go run main.go
 ### 3. Docker 部署
 
 ```bash
-docker build -t feishu-git-push-bot .
-
 docker run -d -p 8080:8080 \
   --env-file .env \
-  feishu-git-push-bot
+  ghcr.io/ncunix/feishugitpushbot
+```
+
+本地构建
+
+```bash
+docker build -t feishu-git-push-bot .
 ```
 
 ## ⚓ Webhook 配置
